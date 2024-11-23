@@ -147,3 +147,4 @@ class Plateau:
         pass
 
 print("test")
+print('mouahah')
