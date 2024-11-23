@@ -145,3 +145,5 @@ class Plateau:
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
         pass
+
+print("test")
