@@ -41,7 +41,18 @@ class Plateau:
         Returns:
             str: Une représentation en chaîne de caractères du plateau.
         """
-        pass
+        lignes = []
+        lignes.append("   -------------------")
+
+        for i, ligne in enumerate(plateau):
+            ligne_str = f"{i+1} | " + " | ".join(ligne) + " |"
+            lignes.append(ligne_str)
+            if i < len(plateau) - 1:
+                lignes.append("  |---|---|---|---|---|")
+        
+        lignes.append("--|---|---|---|---|---|")
+        lignes.append("  | 1   2   3   4   5 |")
+        return "\n".join(lignes) + "\n"
 
     def __getitem__(self, position):
         """Retourne la valeur à la position donnée
