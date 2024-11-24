@@ -99,8 +99,20 @@ class Plateau:
             QuixoError: Format du plateau invalide.
             QuixoError: Valeur du cube invalide.
         """
-        if plateau == None:
-            return 
+
+ 
+        if plateau is None:
+            plateau = [['' for _ in range(5)] for _ in range(5)]
+
+        if not isinstance(plateau, list) and len(plateau) == taille:
+            for ligne in plateau:
+                if len(ligne) != 5:
+                    raise QuixoError('Format du plateau invalide.')
+            for cube in ligne:
+                if cube not in [' ', 'X', 'O']:
+                    raise QuixoError('Valeur du cube invalide.')
+        
+
 
     def insérer_un_cube(self, cube, origine, direction):
         """Insère un cube dans le plateau
