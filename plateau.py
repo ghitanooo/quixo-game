@@ -156,7 +156,18 @@ class Plateau:
             QuixoError: La direction doit être "haut", "bas", "gauche" ou "droite".
             QuixoError: Le cube à insérer ne peut pas être vide.
         """
-        pass
+        if cube not in {"X", "O"}:
+            raise QuixoError("Le cube à insérer ne peut pas être vide.")
+        if direction not in {"haut", "bas", "gauche", "droite"}:
+            raise QuixoError("La direction doit être "haut", "bas", "gauche" ou "droite".")
+        if direction == "bas":
+            self.insérer_par_le_bas(cube, origine)
+        elif direction == "haut":
+            self.insérer_par_le_haut(cube, origine)
+        elif direction == "gauche":
+            self.insérer_par_la_gauche(cube, origine)
+        elif direction == "droite":
+            self.insérer_par_la_droite(cube, origine)
 
     def insérer_par_le_bas(self, cube, origine):
         """Insère un cube dans le plateau en direction du bas
