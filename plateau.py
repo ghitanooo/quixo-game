@@ -111,15 +111,15 @@ class Plateau:
 
  
         if plateau is None:
-            plateau = [['' for _ in range(5)] for _ in range(5)]
+            plateau = [[' ' for _ in range(5)] for _ in range(5)]
 
-        if not isinstance(plateau, list) and len(plateau) == taille:
+        if isinstance(plateau, list) and len(plateau) == 5:
             for ligne in plateau:
                 if len(ligne) != 5:
                     raise QuixoError('Format du plateau invalide.')
-            for cube in ligne:
-                if cube not in [' ', 'X', 'O']:
-                    raise QuixoError('Valeur du cube invalide.')
+                for cube in ligne:
+                    if cube not in [' ', 'X', 'O']:
+                        raise QuixoError('Valeur du cube invalide.')
                 
         else: 
             raise QuixoError('Format du plateau invalide.')
@@ -128,16 +128,14 @@ class Plateau:
 
         for i, ligne in enumerate(plateau):
             damier += f"{i+1} | " + " | ".join(ligne) + " |\n"
-
-        if i < len(plateau) -1:
-                damier += "  |---|---|---|---|---|\n"
+            if i < len(plateau) -1:
+                    damier += "  |---|---|---|---|---|\n"
 
         damier += "--|---|---|---|---|---|\n"
         damier += "  | 1   2   3   4   5 |\n"
         
 
         return damier
-        
 
 
     def insérer_un_cube(self, cube, origine, direction):
