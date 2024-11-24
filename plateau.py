@@ -120,6 +120,23 @@ class Plateau:
             for cube in ligne:
                 if cube not in [' ', 'X', 'O']:
                     raise QuixoError('Valeur du cube invalide.')
+                
+        else: 
+            raise QuixoError('Format du plateau invalide.')
+
+        damier = "   -------------------\n"
+
+        for i, ligne in enumerate(plateau):
+            damier += f"{i+1} | " + " | ".join(ligne) + " |\n"
+
+        if i < len(plateau) -1:
+                damier += "  |---|---|---|---|---|\n"
+
+        damier += "--|---|---|---|---|---|\n"
+        damier += "  | 1   2   3   4   5 |\n"
+        
+
+        return damier
         
 
 
