@@ -159,7 +159,7 @@ class Plateau:
         if cube not in {"X", "O"}:
             raise QuixoError("Le cube à insérer ne peut pas être vide.")
         if direction not in {"haut", "bas", "gauche", "droite"}:
-            raise QuixoError("La direction doit être "haut", "bas", "gauche" ou "droite".")
+            raise QuixoError("La direction doit être 'haut', 'bas', 'gauche' ou 'droite'.")
         if direction == "bas":
             self.insérer_par_le_bas(cube, origine)
         elif direction == "haut":
@@ -213,6 +213,6 @@ class Plateau:
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
         x, y = origine
-        for i in range(4, 0, -1):
+        for j in range(4, 0, -1):
             self[x, y + j] = self[x, y + j -1]
         self[x, 1] = cube
