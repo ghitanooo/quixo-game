@@ -54,9 +54,10 @@ class Quixo:
         Returns:
             str: Une représentation en chaîne de caractères du plateau.
         """
-        légende = f"Légende:\n   X={joueurs[0]}\n   O={joueurs[1]}\n"
+        légende = f"Légende:\n   X={self.joueurs[0]}\n   O={self.joueurs[1]}\n"
 
         damier = "   -------------------\n"
+        plateau = self.plateau.état_plateau()
 
         for i, ligne in enumerate(plateau):
             damier += f"{i+1} | " + " | ".join(ligne) + " |\n"
@@ -66,8 +67,6 @@ class Quixo:
 
         damier += "--|---|---|---|---|---|\n"
         damier += "  | 1   2   3   4   5 |\n"
-
-        plateau = self.plateau.état_plateau()
 
         return f"{légende}{damier}"
 
