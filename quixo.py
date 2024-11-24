@@ -81,7 +81,7 @@ class Quixo:
             origine (list[int]): La position (x, y) du pion sur le plateau.
             direction (str): La direction du déplacement, soit "haut", "bas", "gauche" ou "droite".
         """
-        pass
+        self.insérer_un_cube(pion, origine, direction)
 
     def choisir_un_coup(self):
         """Demander le prochain coup à jouer au joueur.
