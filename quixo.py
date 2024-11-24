@@ -54,7 +54,23 @@ class Quixo:
         Returns:
             str: Une représentation en chaîne de caractères du plateau.
         """
-        pass
+        légende = f"Légende:\n   X={joueurs[0]}\n   O={joueurs[1]}\n"
+
+        damier = "   -------------------\n"
+
+        for i, ligne in enumerate(plateau):
+            damier += f"{i+1} | " + " | ".join(ligne) + " |\n"
+
+            if i < len(plateau) -1:
+                damier += "  |---|---|---|---|---|\n"
+
+        damier += "--|---|---|---|---|---|\n"
+        damier += "  | 1   2   3   4   5 |\n"
+
+        plateau = self.plateau.état_plateau()
+
+        return f"{légende}{damier}"
+
 
     def déplacer_pion(self, pion, origine, direction):
         """Déplacer un pion dans une direction donnée.
