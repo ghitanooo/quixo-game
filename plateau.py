@@ -66,7 +66,10 @@ class Plateau:
         Raises:
             QuixoError: Les positions x et y doivent être entre 1 et 5 inclusivement.
         """
-        pass
+        x, y = position
+        if not (1 <= x <= 5) or not (1 <= y <= 5):
+            raise QuixoError('...')
+        return self.plateau[x - 1][y - 1]
 
     def __setitem__(self, position, valeur):
         """Modifie la valeur à la position donnée
