@@ -88,7 +88,8 @@ class Plateau:
             QuixoError: Format du plateau invalide.
             QuixoError: Valeur du cube invalide.
         """
-        pass
+        if plateau == None:
+            return 
 
     def insérer_un_cube(self, cube, origine, direction):
         """Insère un cube dans le plateau
@@ -149,4 +150,4 @@ class Plateau:
 print("test")
 print('mouahah')
 
-print('0223')
+print('2123')
