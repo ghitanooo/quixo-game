@@ -66,7 +66,10 @@ class Plateau:
         Raises:
             QuixoError: Les positions x et y doivent être entre 1 et 5 inclusivement.
         """
-        pass
+        x, y = position
+        if not (1 <= x <= 5) or not (1 <= y <= 5):
+            raise QuixoError('Les positions x et y doivent être entre 1 et 5 inclusivement.')
+        return self.plateau[x - 1][y - 1]
 
     def __setitem__(self, position, valeur):
         """Modifie la valeur à la position donnée
@@ -79,7 +82,13 @@ class Plateau:
             QuixoError: Les positions x et y doivent être entre 1 et 5 inclusivement.
             QuixoError: Valeur du cube invalide.
         """
-        pass
+        x, y = position
+        if not (1 <= x <= 5) or not (1 <= y <= 5):
+            raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
+        if valeur not in {"X", "O", " "}:
+            raise QuixoError("Valeur du cube invalide.")
+        self.plateau[x - 1][y - 1]
+
 
     def générer_le_plateau(self, plateau):
         """Génère un plateau de jeu
@@ -169,8 +178,3 @@ class Plateau:
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
         pass
-
-print("test")
-print('mouahah')
-
-print('2123')
