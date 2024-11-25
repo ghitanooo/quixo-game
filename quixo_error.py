@@ -12,4 +12,4 @@ class QuixoError(Exception):
         """
         Retourne une représentation lisible de l'exception avec son message.
         """
-        return f"QuixoError: {self.args[0]}"
+        return self.args[0]
