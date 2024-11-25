@@ -70,7 +70,6 @@ class Quixo:
 
         return f"{légende}{damier}"
 
-
     def déplacer_pion(self, pion, origine, direction):
         """Déplacer un pion dans une direction donnée.
 
