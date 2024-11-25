@@ -125,9 +125,8 @@ def interpréter_la_commande():
         Namespace: Un objet Namespace tel que retourné par parser.parse_args().
             Cet objet aura l'attribut «idul» représentant l'idul du joueur.
     """
-    parser = argparse.ArgumentParser()
-
-    # Complétez le code ici
-    # vous pourriez aussi avoir à ajouter des arguments dans ArgumentParser(...)
+    parser = argparse.ArgumentParser(description="Quixo")
+    parser.add_argument("idul", help="IDUL du joueur")
 
     return parser.parse_args()
+
