@@ -109,7 +109,7 @@ class Quixo:
         x = int(x_str.strip())
         y = int(y_str.strip())
 
-        if not (1 <= x <= 5 and 1 <= 1 y <= 5):
+        if not (1 <= x <= 5 and 1 <= y <= 5):
             raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
         
         direction =  input("Quelle direction voulez-vous insérer? ('haut', 'bas', 'gauche', 'droite') :")
