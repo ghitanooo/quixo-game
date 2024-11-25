@@ -80,7 +80,7 @@ class Quixo:
             origine (list[int]): La position (x, y) du pion sur le plateau.
             direction (str): La direction du déplacement, soit "haut", "bas", "gauche" ou "droite".
         """
-        self.insérer_un_cube(pion, origine, direction)
+        self.plateau.insérer_un_cube(pion, origine, direction)
 
     def choisir_un_coup(self):
         """Demander le prochain coup à jouer au joueur.
@@ -105,18 +105,18 @@ class Quixo:
         x_str, y_str = position_str.split(",")
         if not x_str.strip().isdigit() or not y_str.strip().isdigit():
             raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
-        
+
         x = int(x_str.strip())
         y = int(y_str.strip())
 
         if not (1 <= x <= 5 and 1 <= y <= 5):
             raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
-        
-        direction =  input("Quelle direction voulez-vous insérer? ('haut', 'bas', 'gauche', 'droite') :")
+
+        direction = input("Quelle direction voulez-vous insérer? ('haut', 'bas', 'gauche', 'droite') :")
 
         if direction not in {"haut", "bas", "gauche", "droite"}:
             raise QuixoError('La direction doit être "haut", "bas", "gauche" ou "droite".')
-        
+
         return ([x, y], direction)
 
 def interpréter_la_commande():
@@ -129,4 +129,3 @@ def interpréter_la_commande():
     parser.add_argument("idul", help="IDUL du joueur")
 
     return parser.parse_args()
-

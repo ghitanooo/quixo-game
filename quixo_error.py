@@ -6,6 +6,5 @@ class QuixoError(Exception):
         """
         Retourne une représentation lisible de l'exception avec son message.
         """
-        if self.args and self.args[0]:
-            f"QuixoError: {self.args[0]}"
+        f"QuixoError: {self.args[0]}"
         return "QuixoError"
