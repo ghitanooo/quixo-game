@@ -1,3 +1,9 @@
+"""
+    Module QuixoError
+
+    Classe:
+        *QuixoError
+    """
 class QuixoError(Exception):
     """
     Classe d'exception personnalisée pour les erreurs liées au jeu Quixo.
