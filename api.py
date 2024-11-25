@@ -30,7 +30,24 @@ def initialiser_partie(idul, secret):
         tuple: Tuple de 3 éléments constitué de l'identifiant de la partie en cours,
             de la liste des joueurs et de l'état du plateau.
     """
-    pass
+    rep = requests.post(
+        URL + 'partie/',
+        auth = (idul, secret)
+        )
+
+    if rep.status_code == 401:
+        raise PermissionError(rep.text)
+
+    if rep.status_code == 406:
+        raise RuntimeError(rep.text)
+
+    if rep.status_code == 200:
+        result = rep.json()
+        return (result['id'],
+                result['état']['joueurs'],
+                result['état']['plateau']
+                )
+    raise ConnectionError
 
 
 def jouer_un_coup(id_partie, origine, direction, idul, secret):
@@ -57,7 +74,36 @@ def jouer_un_coup(id_partie, origine, direction, idul, secret):
         tuple: Tuple de 3 éléments constitué de l'identifiant de la partie en cours,
             de la liste des joueurs et de l'état du plateau.
     """
-    pass
+    url = f"{URL}partie/{id_partie}"
+
+    rep = requests.put(
+        url,
+        auth=(idul, secret),
+        json={
+            "origine": origine,
+            "direction": direction
+            }
+    )
+
+    if rep.status_code == 401:
+        raise PermissionError(rep.text)
+
+    if rep.status_code == 406:
+        raise RuntimeError(rep.text)
+
+    if rep.status_code == 200:
+        result = rep.json()
+
+        if result['gagnant'] is None:
+            return (result['id'],
+                result['état']['joueurs'],
+                result['état']['plateau']
+            )
+
+        raise StopIteration(result['gagnant'])
+
+    raise ConnectionError
+
 
 
 def récupérer_une_partie(id_partie, idul, secret):
