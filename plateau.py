@@ -49,7 +49,7 @@ class Plateau:
             lignes.append(ligne_str)
             if i < len(self.plateau) - 1:
                 lignes.append("  |---|---|---|---|---|")
-        
+
         lignes.append("--|---|---|---|---|---|")
         lignes.append("  | 1   2   3   4   5 |")
         return "\n".join(lignes) + "\n"
@@ -67,7 +67,7 @@ class Plateau:
             QuixoError: Les positions x et y doivent être entre 1 et 5 inclusivement.
         """
         x, y = position
-        if not (1 <= x <= 5) or not (1 <= y <= 5):
+        if not 1 <= x <= 5 or not 1 <= y <= 5:
             raise QuixoError('Les positions x et y doivent être entre 1 et 5 inclusivement.')
         return self.plateau[x - 1][y - 1]
 
@@ -83,11 +83,10 @@ class Plateau:
             QuixoError: Valeur du cube invalide.
         """
         x, y = position
-        if not (1 <= x <= 5) or not (1 <= y <= 5):
+        if not 1 <= x <= 5 or not 1 <= y <= 5:
             raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
         if valeur not in {"X", "O", " "}:
             raise QuixoError("Valeur du cube invalide.")
-        self.plateau[x - 1][y - 1]
 
 
     def générer_le_plateau(self, plateau):
@@ -109,7 +108,7 @@ class Plateau:
             QuixoError: Valeur du cube invalide.
         """
 
- 
+
         if plateau is None:
             plateau = [[' ' for _ in range(5)] for _ in range(5)]
 
@@ -120,8 +119,8 @@ class Plateau:
                 for cube in ligne:
                     if cube not in [' ', 'X', 'O']:
                         raise QuixoError('Valeur du cube invalide.')
-                
-        else: 
+
+        else:
             raise QuixoError('Format du plateau invalide.')
 
 
