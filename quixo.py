@@ -16,6 +16,14 @@ from plateau import Plateau
 
 
 class Quixo:
+    """
+    Functions:
+        * __init__
+        * état_partie
+        * __str__
+        * déplacer_un_cube
+        * choisir_un_coup
+    """
     def __init__(self, joueurs, plateau=None) -> None:
         """Constructeur de la classe Quixo
 
@@ -112,7 +120,9 @@ class Quixo:
         if not (1 <= x <= 5 and 1 <= y <= 5):
             raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
 
-        direction = input("Quelle direction voulez-vous insérer? ('haut', 'bas', 'gauche', 'droite') :")
+        direction = input(
+            "Quelle direction voulez-vous insérer? ('haut', 'bas', 'gauche', 'droite') :"
+            )
 
         if direction not in {"haut", "bas", "gauche", "droite"}:
             raise QuixoError('La direction doit être "haut", "bas", "gauche" ou "droite".')

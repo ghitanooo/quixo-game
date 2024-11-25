@@ -8,6 +8,7 @@ from quixo import Quixo
 
 
 def test_formater_le_damier_pour_une_nouvelle_partie():
+    """Test de la fonction __str__ dans plateau pour formater le damier"""
     plateau = Plateau()
 
     attendu = (
@@ -31,6 +32,7 @@ def test_formater_le_damier_pour_une_nouvelle_partie():
 
 
 def test_formater_le_jeu_pour_une_nouvelle_partie():
+    """Test de la fonction __str__ dans quixo pour formater le jeu"""
     joueurs = ["josmi42", "automate"]
 
     quixo = Quixo(joueurs)
@@ -59,6 +61,9 @@ def test_formater_le_jeu_pour_une_nouvelle_partie():
 
 
 def test_formater_le_jeu_pour_une_partie_avancée():
+    """
+    Test de la fonction __str__ dans quixo pour formater le jeu pour une partie avancée
+    """
     joueurs = ["josmi42", "automate"]
     plateau = [
         [" ", " ", "X", " ", " "],

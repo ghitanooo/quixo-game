@@ -10,6 +10,8 @@ from quixo_error import QuixoError
 
 
 class Plateau:
+    """Classe principale du plateau de jeu Quixo.
+    """
     def __init__(self, plateau=None):
         """Constructeur de la classe Plateau
 
