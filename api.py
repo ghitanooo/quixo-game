@@ -134,7 +134,7 @@ def récupérer_une_partie(id_partie, idul, secret):
         raise RuntimeError(rep.text)
 
     if rep.status_code == 200:
-        data = rep.json
+        data = rep.json()
         return data["id"], data["état"]["joueurs"], data["état"]["plateau"], data["gagnant"]
 
 
