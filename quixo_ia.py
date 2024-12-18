@@ -28,5 +28,18 @@ class QuixoIA(Quixo):
         Raise: 
             *QuixoError si le cube n'est pas valide, ou si la parties est terminée
         """
+        if symbole not in ('X', 'O'):
+            raise QuixoError('Le cube doit être "X" ou "O".')
+
+        if all(all(symbole in {'X', 'O'} for symbole in ligne) for ligne in plateau):
+            raise QuixoError('La partie est déjà terminée.')
         
+        coups_possibles = []
+
+        
+
+    def analyser_le_plateau(plateau):
+        """ 
+        """
+
 
