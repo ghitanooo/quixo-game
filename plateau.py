@@ -84,12 +84,14 @@ class Plateau:
             QuixoError: Les positions x et y doivent être entre 1 et 5 inclusivement.
             QuixoError: Valeur du cube invalide.
         """
-        x, y = position
-        if not 1 <= x <= 5 or not 1 <= y <= 5:
-            raise QuixoError("Les positions x et y doivent être entre 1 et 5 inclusivement.")
-        if valeur not in {"X", "O", " "}:
-            raise QuixoError("Valeur du cube invalide.")
-
+        x = position[0] - 1
+        y = position[1] - 1
+        if self.__getitem__(position) in ('X', ' ', 'O'):
+            if valeur not in ('X', 'O', ' '):
+                raise QuixoError("Valeur du cube invalide.")
+            self.plateau[y][x] = valeur
+        else:
+            self.__getitem__(position)
 
     def générer_le_plateau(self, plateau):
         """Génère un plateau de jeu
