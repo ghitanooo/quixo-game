@@ -3,7 +3,9 @@
 Classe:
     * QuixoIA - Classe utilisée pour jouer automatiquement contre l'ordinateur
 """
+from quixo import Quixo
 
+from plateau import Plateau
 
 class QuixoIA(Quixo):
     """
@@ -37,42 +39,26 @@ class QuixoIA(Quixo):
         coups_possibles = []
 
 
-        taille = len(plateau.plateau)
-
         for y, ligne in enumerate(plateau.Plateau, start=1):
             for x, case in enumerate(ligne, start=1):
                 if case == ' ' or case == cube:
                     directions = []
 
-                    if (x, y) in [(1, 1), (1, taille), (taille, 1), (taille, taille)]:
-                        if x == 1: 
-                            directions.append('droite')
-                        else:
-                            directions.append('gauche')
-                        if y == 1:
-                            directions.append('bas')
-                        else:
-                            directions.append('haut')
-
-                    elif x == 1 or x == taille or y == 1 or y == taille:
-                        if x == 1:
-                            directions.extend(['droite', 'haut', 'bas'])
-                        elif x == taille:
-                            directions.extend(['gauche', 'haut', 'bas'])
-                        if y == 1:
-                            directions.extend(['droite', 'gauche', 'bas'])
-                        elif y == 1:
-                            directions.extend(['droite', 'gauche', 'haut'])
+                    if x == 1: 
+                        directions.append('droite')
+                    if x == 5:
+                        directions.append('gauche')
+                    if y == 1:
+                        directions.append('bas')
+                    if y == 5:
+                        directions.append('haut')
 
                     for direction in directions:
                         coups_possibles.append({'origine': [x, y], 'direction': direction})
 
         return coups_possibles
 
-        
 
     def analyser_le_plateau(plateau):
         """ 
         """
-
-
