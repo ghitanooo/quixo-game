@@ -173,7 +173,7 @@ class Plateau:
         y = origine[1] - 1
         for line in range(y, 4):
             self.plateau[line][x] = self.plateau[line + 1][x]
-            self.plateau[4][x] = cube
+        self.plateau[4][x] = cube
 
     def insérer_par_le_haut(self, cube, origine):
         """Insère un cube dans le plateau en direction du haut
