@@ -62,8 +62,15 @@ class QuixoIA(Quixo):
 
 
     def analyser_le_plateau(plateau):
-        """ 
-        """
+        """ Liste pour chaque joueur, le nombre de lignes de 2,3,4 et 5 cubes qu'il possède
+        Args: 
+            *plateau
+
+        Return:
+            *Dictionnaire contenant les clés 'X' et 'O' associées à un dictionnaire
+            *Ce dictionnaire possède clés (2,3,4,5) associées au nombre de lignes de ce nombre de cube
+            """
+        
 
     def partie_terminée(self):
         """ Retourne le nom du vainqueur une fois la partie termineé
