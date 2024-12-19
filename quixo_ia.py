@@ -15,7 +15,7 @@ class QuixoIA(Quixo):
         * trouver_un_coup_bloquant
         * jouer_un_coup
     """
-    def lister_les_coups_possibles(plateau, symbole):
+    def lister_les_coups_possibles(self, plateau, cube):
         """Lister tous les coups possibles dans une partie
 
         Args: 
@@ -28,13 +28,46 @@ class QuixoIA(Quixo):
         Raise: 
             *QuixoError si le cube n'est pas valide, ou si la parties est terminée
         """
-        if symbole not in ('X', 'O'):
+        if cube not in ('X', 'O'):
             raise QuixoError('Le cube doit être "X" ou "O".')
 
-        if all(all(symbole in {'X', 'O'} for symbole in ligne) for ligne in plateau):
+        if all(all(cube in {'X', 'O'} for cube in ligne) for ligne in Plateau.plateau):
             raise QuixoError('La partie est déjà terminée.')
-        
+
         coups_possibles = []
+
+
+        taille = len(plateau.plateau)
+
+        for y, ligne in enumerate(plateau.Plateau, start=1):
+            for x, case in enumerate(ligne, start=1):
+                if case == ' ' or case == cube:
+                    directions = []
+
+                    if (x, y) in [(1, 1), (1, taille), (taille, 1), (taille, taille)]:
+                        if x == 1: 
+                            directions.append('droite')
+                        else:
+                            directions.append('gauche')
+                        if y == 1:
+                            directions.append('bas')
+                        else:
+                            directions.append('haut')
+
+                    elif x == 1 or x == taille or y == 1 or y == taille:
+                        if x == 1:
+                            directions.extend(['droite', 'haut', 'bas'])
+                        elif x == taille:
+                            directions.extend(['gauche', 'haut', 'bas'])
+                        if y == 1:
+                            directions.extend(['droite', 'gauche', 'bas'])
+                        elif y == 1:
+                            directions.extend(['droite', 'gauche', 'haut'])
+
+                    for direction in directions:
+                        coups_possibles.append({'origine': [x, y], 'direction': direction})
+
+        return coups_possibles
 
         
 
