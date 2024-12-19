@@ -61,7 +61,7 @@ class QuixoIA(Quixo):
         return coups_possibles
 
 
-    def analyser_le_plateau(plateau):
+    def analyser_le_plateau(self, plateau):
         """ Liste pour chaque joueur, le nombre de lignes de 2,3,4 et 5 cubes qu'il possède
         Args: 
             *plateau
