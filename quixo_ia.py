@@ -162,7 +162,7 @@ def test_analyser_le_plateau():
     plateau = Plateau(entré_plateau)
 
     # Appel de la fonction
-    resultats = analyser_le_plateau(plateau)
+    resultats = QuixoIA.analyser_le_plateau(plateau)
 
     # Résultat attendu
     attendu = {
