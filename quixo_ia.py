@@ -7,6 +7,8 @@ from quixo import Quixo
 
 from plateau import Plateau
 
+from quixo_error import QuixoError
+
 class QuixoIA(Quixo):
     """
     Fonctions:
@@ -33,13 +35,13 @@ class QuixoIA(Quixo):
         if cube not in ('X', 'O'):
             raise QuixoError('Le cube doit être "X" ou "O".')
 
-        if all(all(cube in {'X', 'O'} for cube in ligne) for ligne in Plateau.plateau):
+        if all(all(cube in {'X', 'O'} for cube in ligne) for ligne in plateau):
             raise QuixoError('La partie est déjà terminée.')
 
         coups_possibles = []
 
 
-        for y, ligne in enumerate(plateau.Plateau, start=1):
+        for y, ligne in enumerate(plateau, start=1):
             for x, case in enumerate(ligne, start=1):
                 if case == ' ' or case == cube:
                     directions = []
@@ -62,3 +64,56 @@ class QuixoIA(Quixo):
     def analyser_le_plateau(plateau):
         """ 
         """
+
+    def partie_terminée(self):
+        """ Retourne le nom du vainqueur une fois la partie termineé
+        
+        Aucun argument
+        
+        Return: 
+            *Si la partie est terminée : nom du joueur vainqueur
+            *Si la partie n'est pas terminée : None
+        """
+        for ligne in self.plateau:
+            for i in range(len(ligne) - 4):
+                if ligne[i] == ligne[i+1] == ligne[i+2] == ligne[i+3] == ligne[i+4] and ligne[i] is not None:
+                    return ligne[i]
+
+        for colonne in range(len(self.plateau[0])):
+            for ligne in range(len(self.plateau) - 4):
+                if self.plateau[ligne][colonne] == (
+                    self.plateau[ligne+1][colonne]) == (
+                        self.plateau[ligne+2][colonne]) == (
+                            self.plateau[ligne+3][colonne]) == (
+                                self.plateau[ligne+4][colonne]) and (
+                                    self.plateau[ligne][colonne] is not None):
+                    return self.plateau[ligne][colonne]
+
+        for ligne in range(4, len(self.plateau)):
+            for colonne in range(len(self.plateau[0]) - 4):
+                if self.plateau[ligne][colonne] == (
+                    self.plateau[ligne-1][colonne+1]) == (
+                        self.plateau[ligne-2][colonne+2]) == (
+                            self.plateau[ligne-3][colonne+3]) == (
+                                self.plateau[ligne-4][colonne+4]) and (
+                                    self.plateau[ligne][colonne] is not None):
+                    return self.plateau[ligne][colonne]
+                
+        for ligne in range(len(self.plateau, - 4)):
+            for colonne in range(len(self.plateau[0]) - 4):
+                if self.plateau[ligne][colonne] == (
+                    self.plateau[ligne+1][colonne+1]) == (
+                        self.plateau[ligne+2][colonne+2]) == (
+                            self.plateau[ligne+3][colonne+3]) == (
+                                self.plateau[ligne+4][colonne+4]) and (
+                                    self.plateau[ligne][colonne] is not None):
+                    return self.plateau[ligne][colonne]
+    
+        return None
+
+    def trouver_un_coup_vainqueur(symbole):
+        """Retourne un coup gagnant possible selon le symbole reçu
+         
+        Return: 
+            *None : si aucun coup vainqueur n'est possible """
+        
