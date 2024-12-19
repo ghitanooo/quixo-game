@@ -186,7 +186,7 @@ class Plateau:
         y = origine[1] - 1
         for line in range(y, 0, -1):
             self.plateau[line][x] = self.plateau[line - 1][x]
-            self.plateau[0][x] = cube
+        self.plateau[0][x] = cube
 
     def insérer_par_la_gauche(self, cube, origine):
         """Insère un cube dans le plateau en direction de la gauche
@@ -199,7 +199,7 @@ class Plateau:
         y = origine[1] - 1
         for case in range(x, 0, -1):
             self.plateau[y][case] = self.plateau[y][case - 1]
-            self.plateau[y][0] = cube
+        self.plateau[y][0] = cube
 
     def insérer_par_la_droite(self, cube, origine):
         """Insère un cube dans le plateau en direction de la droite
@@ -212,9 +212,9 @@ class Plateau:
         y = origine[1] - 1
         for case in range(x, 4):
             self.plateau[y][case] = self.plateau[y][case + 1]
-            self.plateau[y][4] = cube
+        self.plateau[y][4] = cube
 
-def test_insérer_par_le_bas():
+def test_insérer_par_la_droite():
     x, y = 1, 1
     entré_plateau = [
         [' ', ' ', ' ', ' ', ' '],
@@ -224,15 +224,15 @@ def test_insérer_par_le_bas():
         [' ', ' ', ' ', ' ', ' ']
     ]
     plateau = Plateau(entré_plateau)
-    plateau.insérer_par_le_bas("X", [x, y])
+    plateau.insérer_par_la_droite("X", [x, y])
     
     # Afficher le plateau après insertion
-    print("État du plateau après insertion vers le bas :")
+    print("État du plateau après insertion vers le haut :")
     for ligne in plateau.état_plateau():
         print(ligne)
 
 # Exécuter le test
-test_insérer_par_le_bas()
+test_insérer_par_la_droite()
 
 
 
