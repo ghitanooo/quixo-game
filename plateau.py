@@ -169,10 +169,11 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
-        x, y = origine
-        for i in range(4, 0, -1):
-            self[x + i, y] = self[x + i - 1, y]
-        self[1, y] = cube
+        x = origine[0] - 1
+        y = origine[1] - 1
+        for line in range(y, 4):
+            self.plateau[line][x] = self.plateau[line + 1][x]
+            self.plateau[4][x] = cube
 
     def insérer_par_le_haut(self, cube, origine):
         """Insère un cube dans le plateau en direction du haut
@@ -181,10 +182,11 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
-        x, y = origine
-        for i in range(1, 5):
-            self[x + i - 1, y] = self[x + i, y]
-        self[5, y] = cube
+        x = origine[0] - 1
+        y = origine[1] - 1
+        for line in range(y, 0, -1):
+            self.plateau[line][x] = self.plateau[line - 1][x]
+            self.plateau[0][x] = cube
 
     def insérer_par_la_gauche(self, cube, origine):
         """Insère un cube dans le plateau en direction de la gauche
@@ -193,10 +195,11 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
-        x, y = origine
-        for j in range(1, 5):
-            self[x, y + j - 1] = self[x, y + j]
-        self[x, 5] = cube
+        x = origine[0] - 1
+        y = origine[1] - 1
+        for case in range(x, 0, -1):
+            self.plateau[y][case] = self.plateau[y][case - 1]
+            self.plateau[y][0] = cube
 
     def insérer_par_la_droite(self, cube, origine):
         """Insère un cube dans le plateau en direction de la droite
@@ -205,7 +208,34 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
-        x, y = origine
-        for j in range(4, 0, -1):
-            self[x, y + j] = self[x, y + j -1]
-        self[x, 1] = cube
+        x = origine[0] - 1
+        y = origine[1] - 1
+        for case in range(x, 4):
+            self.plateau[y][case] = self.plateau[y][case + 1]
+            self.plateau[y][4] = cube
+
+def test_insérer_par_le_bas():
+    x, y = 1, 1
+    entré_plateau = [
+        [' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ']
+    ]
+    plateau = Plateau(entré_plateau)
+    plateau.insérer_par_le_bas("X", [x, y])
+    
+    # Afficher le plateau après insertion
+    print("État du plateau après insertion vers le bas :")
+    for ligne in plateau.état_plateau():
+        print(ligne)
+
+# Exécuter le test
+test_insérer_par_le_bas()
+
+
+
+
+
+
