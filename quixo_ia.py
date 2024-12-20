@@ -70,33 +70,43 @@ class QuixoIA(Quixo):
             *Dictionnaire contenant les clés 'X' et 'O' associées à un dictionnaire
             *Ce dictionnaire possède clés (2,3,4,5) associées au nombre de lignes de ce nombre de cube
             """
-        resultats = {'X': {2: 0, 3: 0, 4: 0, 5: 0},
-                 'O': {2: 0, 3: 0, 4: 0, 5: 0}}
-        grille = plateau.état_plateau()
-        for ligne in grille:
-            for joueur in ['X', 'O']:
-                for taille in range(2, 6):
-                    if ligne.count(joueur) == taille and ligne.count(' ') == len(ligne) - taille:
-                        resultats[joueur][taille] += 1
+        resultat = {
+            "X": {"2": 0, "3": 0, "4": 0, "5": 0},
+            "O": {"2": 0, "3": 0, "4": 0, "5": 0}
+        }
 
-        for x in range(5):
-            colonne = [grille[y][x] for y in range(5)]
-            for joueur in ['X', 'O']:
-                for taille in range(2, 6):
-                    if colonne.count(joueur) == taille and colonne.count(' ') == len(colonne) - taille:
-                        resultats[joueur][taille] += 1
-        diagonales = [
-            [grille[i][i] for i in range(5)],
-            [grille[i][4 - i] for i in range(5)]
-        ]
-        for diag in diagonales:
-            for joueur in ['X', 'O']:
-                for taille in range(2, 6):
-                    if diag.count(joueur) == taille and diag.count(' ') == len(diag) - taille:
-                        resultats[joueur][taille] += 1
+        for ligne in plateau:
+            if ligne.count("X") > 1:
+                resultat["X"][str(ligne.count("X"))] += 1
+            if ligne.count("O") > 1:
+                resultat["O"][str(ligne.count("O"))] += 1
         
-        return resultats
-
+        for index_col in range(5):
+            colonne_temp = []
+            for index_row in range(5):
+                colonne_temp.append(plateau[index_row][index_col])
+            if colonne_temp.count("X") > 1:
+                resultat["X"][str(colonne_temp.count("X"))] += 1
+            if colonne_temp.count("O") > 1:
+                resultat["O"][str(colonne_temp.count("X"))] += 1
+        
+        diagonale_gauche = []
+        diagonale_droite = []
+        for idx in range(5):
+            diagonale_gauche.append(plateau[idx][idx])
+            diagonale_gauche.append(plateau[idx][4 - idx])
+        if diagonale_gauche.count("X") > 1:
+            resultat["X"][str(diagonale_gauche.count("X"))] += 1
+        if diagonale_gauche.count("O") > 1:
+            resultat["O"][str(diagonale_gauche.count("X"))] += 1
+        if diagonale_droite.count("X") > 1:
+            resultat["X"][str(diagonale_droite.count("X"))] += 1
+        if diagonale_droite.count("O") > 1:
+            resultat["O"][str(diagonale_droite.count("X"))] += 1
+            
+        return resultat
+            
+    
     def partie_terminée(self):
         """ Retourne le nom du vainqueur une fois la partie termineé
         
