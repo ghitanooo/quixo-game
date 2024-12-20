@@ -131,4 +131,27 @@ class QuixoIA(Quixo):
                     return coup['origine'], coup['direction']
         return None
 
+    def trouver_un_coup_bloquant(self, cube):
+        """ Troubve un coup vloquant.
+        
+        Return: Un coup bloquant si il y en a.
+        Sinon, retourne None.
+        
+        """
+
+        cube_adverse = ""
+        if cube == "X":
+            cube_adverse = "O"
+        else:
+            cube_adverse = "X"
+        if self.trouver_un_coup_vainqueur(cube_adverse) is not None:
+            for tentative in self.lister_les_coups_possibles(
+                self.plateau.état_plateau(), cube
+            ):
+                jeu = QuixoIA(self.joueurs, self.plateau.état_plateau())
+                jeu.plateau.insérer_un_cube(cube, tentative["origine"], tentative["direction"])
+                if jeu.trouver_un_coup_vainqueur(cube_adverse) is None:
+                    return (tentative["origine"], tentative["direction"])
+        return None
+
     def jouer_un_coup(self, cube):
