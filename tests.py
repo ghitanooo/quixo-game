@@ -105,4 +105,3 @@ if __name__ == "__main__":
     print("Test de formater le jeu pour une nouvelle partie réussi")
     test_formater_le_jeu_pour_une_partie_avancée()
     print("Test de formater le jeu pour une partie avancée réussi")
-

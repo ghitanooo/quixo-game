@@ -171,7 +171,7 @@ class Plateau:
         """
         if origine[1] == 5:
             raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
-        
+
         x = origine[0] - 1
         y = origine[1] - 1
         for line in range(y, 4):
@@ -187,7 +187,7 @@ class Plateau:
         """
         if origine[1] == 1:
             raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
-        
+
         x = origine[0] - 1
         y = origine[1] - 1
         for line in range(y, 0, -1):
@@ -203,7 +203,7 @@ class Plateau:
         """
         if origine[0] == 1:
             raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
-        
+
         x = origine[0] - 1
         y = origine[1] - 1
         for case in range(x, 0, -1):
@@ -219,13 +219,9 @@ class Plateau:
         """
         if origine[0] == 5:
             raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
-        
+
         x = origine[0] - 1
         y = origine[1] - 1
         for case in range(x, 4):
             self.plateau[y][case] = self.plateau[y][case + 1]
         self.plateau[y][4] = cube
-
-
-
-

@@ -60,7 +60,7 @@ class QuixoIA(Quixo):
 
         Return:
             *Dictionnaire contenant les clés 'X' et 'O' associées à un dictionnaire
-            *Ce dictionnaire possède clés (2,3,4,5) associées au nombre de lignes de ce nombre de cube
+            *Dictionnaire possédant les clés (2,3,4,5) associées au nombre de lignes du nombre de cubes
             """
         resultat = {
             "X": {"2": 0, "3": 0, "4": 0, "5": 0},
@@ -72,7 +72,7 @@ class QuixoIA(Quixo):
                 resultat["X"][str(ligne.count("X"))] += 1
             if ligne.count("O") > 1:
                 resultat["O"][str(ligne.count("O"))] += 1
-        
+       
         for index_col in range(5):
             colonne_temp = []
             for index_row in range(5):
@@ -81,7 +81,7 @@ class QuixoIA(Quixo):
                 resultat["X"][str(colonne_temp.count("X"))] += 1
             if colonne_temp.count("O") > 1:
                 resultat["O"][str(colonne_temp.count("X"))] += 1
-        
+
         diagonale_gauche = []
         diagonale_droite = []
         for idx in range(5):
@@ -97,8 +97,8 @@ class QuixoIA(Quixo):
             resultat["O"][str(diagonale_droite.count("X"))] += 1
 
         return resultat
-            
-    
+       
+
     def partie_terminée(self):
         """ Retourne le nom du vainqueur une fois la partie termineé
         
@@ -121,7 +121,7 @@ class QuixoIA(Quixo):
          
         Return: 
             *None : si aucun coup vainqueur n'est possible """
-        
+
         if self.analyser_le_plateau(self.plateau.état_plateau())[cube]['4'] > 0:
             for coup in self.lister_les_coups_possibles(self.plateau.état_plateau(), cube):
                 jeu_simulé = QuixoIA(self.joueurs, self.plateau.état_plateau())
@@ -172,7 +172,7 @@ class QuixoIA(Quixo):
         if self.trouver_un_coup_vainqueur(cube) is not None:
             action = self.trouver_un_coup_vainqueur(cube)
             self.déplacer_pion(cube, action[0], action[1])
-            return action 
+            return action
         if self.trouver_un_coup_bloquant(cube) is not None:
             action = self.trouver_un_coup_bloquant(cube)
             self.déplacer_pion(cube, action[0], action[1])
