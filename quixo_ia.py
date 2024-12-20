@@ -116,12 +116,19 @@ class QuixoIA(Quixo):
             return self.joueurs[1]
         return None
 
-    def trouver_un_coup_vainqueur(symbole):
+    def trouver_un_coup_vainqueur(self, cube):
         """Retourne un coup gagnant possible selon le symbole reçu
          
         Return: 
             *None : si aucun coup vainqueur n'est possible """
-
+        if self.analyser_le_plateau(self.plateau.état_plateau())[cube]['4'] > 0:
+            for coup in self.lister_les_coups_possibles(self.plateau.état_plateau(), cube):
+                jeu_simulé = QuixoIA(self.joueurs, self.plateau.état_plateau())
+                jeu_simulé.plateau.insérer_un_cube(cube, coup['origine'], coup['direction'])
+                if (cube == 'X' and jeu_simulé.partie_terminée() == jeu_simulé.joueurs[0]) or (
+                    cube == 'O' and jeu_simulé.partie_terminée() == jeu_simulé.joueurs[1]):
+                    return coup['origine'], coup['direction']
+        return None
 
 def test_analyser_le_plateau():
     # Plateau d'exemple
