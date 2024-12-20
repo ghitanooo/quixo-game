@@ -132,7 +132,7 @@ class QuixoIA(Quixo):
         return None
 
     def trouver_un_coup_bloquant(self, cube):
-        """ Troubve un coup vloquant.
+        """ Troubve un coup bloquant.
         
         Return: Un coup bloquant si il y en a.
         Sinon, retourne None.
@@ -155,3 +155,28 @@ class QuixoIA(Quixo):
         return None
 
     def jouer_un_coup(self, cube):
+        """ Joue un coup.
+        
+        Args: cube: Le caractère utilisé par le joueur.
+         
+        Raise: QuixoError: la partie est déjà terminée.
+               QuixoError: Le cube doit être "X" ou "O".
+                
+        Return: Un coup valide pour le joueur
+        
+        """
+        if self.partie_terminée() is not None:
+            raise QuixoError("La partie est déjà terminée.")
+        if cube not in ["X", "O"]:
+            raise QuixoError("Le cube doit être 'X' ou 'O'.")
+        if self.trouver_un_coup_vainqueur(cube) is not None:
+            action = self.trouver_un_coup_vainqueur(cube)
+            self.déplacer_pion(cube, action[0], action[1])
+            return action 
+        if self.trouver_un_coup_bloquant(cube) is not None:
+            action = self.trouver_un_coup_bloquant(cube)
+            self.déplacer_pion(cube, action[0], action[1])
+            return action
+        action = random.choice(self.lister_les_coups_possibles(self.plateau.état_plateau(), cube))
+        self.déplacer_pion(cube, action["origine"], action["direction"])
+        return(action["origine"], action["direction"])
