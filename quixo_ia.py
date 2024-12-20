@@ -108,41 +108,12 @@ class QuixoIA(Quixo):
             *Si la partie est terminée : nom du joueur vainqueur
             *Si la partie n'est pas terminée : None
         """
-        for ligne in self.plateau:
-            for i in range(len(ligne) - 4):
-                if ligne[i] == ligne[i+1] == ligne[i+2] == ligne[i+3] == ligne[i+4] and ligne[i] is not None:
-                    return ligne[i]
-
-        for colonne in range(len(self.plateau[0])):
-            for ligne in range(len(self.plateau) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne+1][colonne]) == (
-                        self.plateau[ligne+2][colonne]) == (
-                            self.plateau[ligne+3][colonne]) == (
-                                self.plateau[ligne+4][colonne]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-
-        for ligne in range(4, len(self.plateau)):
-            for colonne in range(len(self.plateau[0]) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne-1][colonne+1]) == (
-                        self.plateau[ligne-2][colonne+2]) == (
-                            self.plateau[ligne-3][colonne+3]) == (
-                                self.plateau[ligne-4][colonne+4]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-                
-        for ligne in range(len(self.plateau, - 4)):
-            for colonne in range(len(self.plateau[0]) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne+1][colonne+1]) == (
-                        self.plateau[ligne+2][colonne+2]) == (
-                            self.plateau[ligne+3][colonne+3]) == (
-                                self.plateau[ligne+4][colonne+4]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-    
+        resultat_x = self.analyser_le_plateau(self.plateau.état_plateau.get('X').get('5'))
+        resultat_o = self.analyser_le_plateau(self.plateau.état_plateau.get('O').get('5'))
+        if resultat_x > 0:
+            return self.joueurs[0]
+        if resultat_o > 0:
+            return self.joueurs[1]
         return None
 
     def trouver_un_coup_vainqueur(symbole):
