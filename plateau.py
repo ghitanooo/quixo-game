@@ -169,6 +169,9 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
+        if origine[1] == 5:
+            raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
+        
         x = origine[0] - 1
         y = origine[1] - 1
         for line in range(y, 4):
@@ -182,6 +185,9 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
+        if origine[1] == 1:
+            raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
+        
         x = origine[0] - 1
         y = origine[1] - 1
         for line in range(y, 0, -1):
@@ -195,6 +201,9 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
+        if origine[0] == 1:
+            raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
+        
         x = origine[0] - 1
         y = origine[1] - 1
         for case in range(x, 0, -1):
@@ -208,33 +217,14 @@ class Plateau:
             cube (str): La valeur du cube à insérer, soit "X" ou "O".
             origine (list[int]): La position [x, y] d'origine du cube à insérer.
         """
+        if origine[0] == 5:
+            raise QuixoError("Le cube ne peut pas être inséré dans cette direction.")
+        
         x = origine[0] - 1
         y = origine[1] - 1
         for case in range(x, 4):
             self.plateau[y][case] = self.plateau[y][case + 1]
         self.plateau[y][4] = cube
-
-def test_insérer_par_la_droite():
-    x, y = 1, 1
-    entré_plateau = [
-        [' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ']
-    ]
-    plateau = Plateau(entré_plateau)
-    plateau.insérer_par_la_droite("X", [x, y])
-    
-    # Afficher le plateau après insertion
-    print("État du plateau après insertion vers le haut :")
-    for ligne in plateau.état_plateau():
-        print(ligne)
-
-# Exécuter le test
-test_insérer_par_la_droite()
-
-
 
 
 

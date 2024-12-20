@@ -3,9 +3,9 @@
 Classe:
     * QuixoIA - Classe utilisée pour jouer automatiquement contre l'ordinateur
 """
-from quixo import Quixo
+import random
 
-from plateau import Plateau
+from quixo import Quixo
 
 from quixo_error import QuixoError
 
