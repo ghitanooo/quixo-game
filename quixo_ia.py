@@ -108,71 +108,27 @@ class QuixoIA(Quixo):
             *Si la partie est terminée : nom du joueur vainqueur
             *Si la partie n'est pas terminée : None
         """
-        for ligne in self.plateau:
-            for i in range(len(ligne) - 4):
-                if ligne[i] == ligne[i+1] == ligne[i+2] == ligne[i+3] == ligne[i+4] and ligne[i] is not None:
-                    return ligne[i]
-
-        for colonne in range(len(self.plateau[0])):
-            for ligne in range(len(self.plateau) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne+1][colonne]) == (
-                        self.plateau[ligne+2][colonne]) == (
-                            self.plateau[ligne+3][colonne]) == (
-                                self.plateau[ligne+4][colonne]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-
-        for ligne in range(4, len(self.plateau)):
-            for colonne in range(len(self.plateau[0]) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne-1][colonne+1]) == (
-                        self.plateau[ligne-2][colonne+2]) == (
-                            self.plateau[ligne-3][colonne+3]) == (
-                                self.plateau[ligne-4][colonne+4]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-                
-        for ligne in range(len(self.plateau, - 4)):
-            for colonne in range(len(self.plateau[0]) - 4):
-                if self.plateau[ligne][colonne] == (
-                    self.plateau[ligne+1][colonne+1]) == (
-                        self.plateau[ligne+2][colonne+2]) == (
-                            self.plateau[ligne+3][colonne+3]) == (
-                                self.plateau[ligne+4][colonne+4]) and (
-                                    self.plateau[ligne][colonne] is not None):
-                    return self.plateau[ligne][colonne]
-    
+        resultat_x = self.analyser_le_plateau(self.plateau.état_plateau.get('X').get('5'))
+        resultat_o = self.analyser_le_plateau(self.plateau.état_plateau.get('O').get('5'))
+        if resultat_x > 0:
+            return self.joueurs[0]
+        if resultat_o > 0:
+            return self.joueurs[1]
         return None
 
-    def trouver_un_coup_vainqueur(symbole):
+    def trouver_un_coup_vainqueur(self, cube):
         """Retourne un coup gagnant possible selon le symbole reçu
          
         Return: 
             *None : si aucun coup vainqueur n'est possible """
-
-    def trouver_un_coup_bloquant(self, cube):
-        """ Troubve un coup vloquant.
         
-        Return: Un coup bloquant si il y en a.
-        Sinon, retourne None.
-        
-        """
-
-        cube_adverse = ""
-        if cube == "X":
-            cube_adverse = "O"
-        else:
-            cube_adverse = "X"
-        if self.trouver_un_coup_vainqueur(cube_adverse) is not None:
-            for tentative in self.lister_les_coups_possibles(
-                self.plateau.état_plateau(), cube
-            ):
-                jeu = QuixoIA(self.joueurs, self.plateau.état_plateau())
-                jeu.plateau.insérer_un_cube(cube, tentative["origine"], tentative["direction"])
-                if jeu.trouver_un_coup_vainqueur(cube_adverse) is None:
-                    return (tentative["origine"], tentative["direction"])
+        if self.analyser_le_plateau(self.plateau.état_plateau())[cube]['4'] > 0:
+            for coup in self.lister_les_coups_possibles(self.plateau.état_plateau(), cube):
+                jeu_simulé = QuixoIA(self.joueurs, self.plateau.état_plateau())
+                jeu_simulé.plateau.insérer_un_cube(cube, coup['origine'], coup['direction'])
+                if (cube == 'X' and jeu_simulé.partie_terminée() == jeu_simulé.joueurs[0]) or (
+                    cube == 'O' and jeu_simulé.partie_terminée() == jeu_simulé.joueurs[1]):
+                    return coup['origine'], coup['direction']
         return None
 
     def jouer_un_coup(self, cube):
-        
