@@ -41,7 +41,7 @@ class QuixoIA(Quixo):
             for y in range (5):
                 if (x in [0, 4] or (
                     y [0, 4]) and (
-                        plateau[x][y] in [cube, ' ']))
+                        plateau[x][y] in [cube, ' '])):
                     if x != 0: 
                         coups_possibles.append({'origine': [y+1, x+1], 'direction': 'haut'})
                     if x != 4:
@@ -95,7 +95,7 @@ class QuixoIA(Quixo):
             resultat["X"][str(diagonale_droite.count("X"))] += 1
         if diagonale_droite.count("O") > 1:
             resultat["O"][str(diagonale_droite.count("X"))] += 1
-            
+
         return resultat
             
     
