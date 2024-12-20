@@ -151,31 +151,28 @@ class QuixoIA(Quixo):
         Return: 
             *None : si aucun coup vainqueur n'est possible """
 
+    def trouver_un_coup_bloquant(self, cube):
+        """ Troubve un coup vloquant.
+        
+        Return: Un coup bloquant si il y en a.
+        Sinon, retourne None.
+        
+        """
 
-def test_analyser_le_plateau():
-    # Plateau d'exemple
-    entré_plateau = [
-        ['O', 'X', 'X', ' ', ' '],
-        ['X', 'X', 'X', 'O', ' '],
-        ['O', 'X', 'O', ' ', 'O'],
-        ['X', 'X', 'X', 'X', 'O'],
-        ['O', ' ', 'O', ' ', ' ']
-    ]
-    plateau = Plateau(entré_plateau)
+        cube_adverse = ""
+        if cube == "X":
+            cube_adverse = "O"
+        else:
+            cube_adverse = "X"
+        if self.trouver_un_coup_vainqueur(cube_adverse) is not None:
+            for tentative in self.lister_les_coups_possibles(
+                self.plateau.état_plateau(), cube
+            ):
+                jeu = QuixoIA(self.joueurs, self.plateau.état_plateau())
+                jeu.plateau.insérer_un_cube(cube, tentative["origine"], tentative["direction"])
+                if jeu.trouver_un_coup_vainqueur(cube_adverse) is None:
+                    return (tentative["origine"], tentative["direction"])
+        return None
 
-    # Appel de la fonction
-    resultats = QuixoIA.analyser_le_plateau(plateau)
-
-    # Résultat attendu
-    attendu = {
-        'X': {2: 3, 3: 4, 4: 0, 5: 0},
-        'O': {2: 4, 3: 0, 4: 1, 5: 0}
-    }
-
-    # Vérification
-    assert resultats == attendu, f"Erreur : {resultats} != {attendu}"
-
-    print("Test réussi : analyser_le_plateau fonctionne correctement.")
-
-# Exécuter le test
-test_analyser_le_plateau()
+    def jouer_un_coup(self, cube):
+        
