@@ -42,7 +42,7 @@ class QuixoIA(Quixo):
                 if (x in [0, 4] or (
                     y [0, 4]) and (
                         plateau[x][y] in [cube, ' '])):
-                    if x != 0: 
+                    if x != 0:
                         coups_possibles.append({'origine': [y+1, x+1], 'direction': 'haut'})
                     if x != 4:
                         coups_possibles.append({'origine': [y+1, x+1], 'direction': 'bas'})
@@ -60,7 +60,8 @@ class QuixoIA(Quixo):
 
         Return:
             *Dictionnaire contenant les clés 'X' et 'O' associées à un dictionnaire
-            *Dictionnaire possédant les clés (2,3,4,5) associées au nombre de lignes du nombre de cubes
+            *Dictionnaire possédant les clés (2,3,4,5),
+            associées au nombre de lignes du nombre de cubes
             """
         resultat = {
             "X": {"2": 0, "3": 0, "4": 0, "5": 0},
@@ -72,7 +73,7 @@ class QuixoIA(Quixo):
                 resultat["X"][str(ligne.count("X"))] += 1
             if ligne.count("O") > 1:
                 resultat["O"][str(ligne.count("O"))] += 1
-       
+
         for index_col in range(5):
             colonne_temp = []
             for index_row in range(5):
@@ -97,7 +98,7 @@ class QuixoIA(Quixo):
             resultat["O"][str(diagonale_droite.count("X"))] += 1
 
         return resultat
-       
+
 
     def partie_terminée(self):
         """ Retourne le nom du vainqueur une fois la partie termineé
