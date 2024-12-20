@@ -137,5 +137,5 @@ def interpréter_la_commande():
     """
     parser = argparse.ArgumentParser(description="Quixo")
     parser.add_argument("idul", help="IDUL du joueur")
-
+    parser.add_argument('-a', '--autonome', help='Jouer de façon autonome', default=False, action='store_true')
     return parser.parse_args()
