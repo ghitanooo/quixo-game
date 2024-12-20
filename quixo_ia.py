@@ -34,13 +34,13 @@ class QuixoIA(Quixo):
         """
         if cube not in ('X', 'O'):
             raise QuixoError('Le cube doit être "X" ou "O".')
-        if all(all(cube in {'X', 'O'} for cube in ligne) for ligne in plateau):
+        if self.partie_terminée() is not None:
             raise QuixoError('La partie est déjà terminée.')
         coups_possibles = []
         for x in range(5):
             for y in range (5):
                 if (x in [0, 4] or (
-                    y [0, 4]) and (
+                    y in [0, 4]) and (
                         plateau[x][y] in [cube, ' '])):
                     if x != 0:
                         coups_possibles.append({'origine': [y+1, x+1], 'direction': 'haut'})
