@@ -109,8 +109,8 @@ class QuixoIA(Quixo):
             *Si la partie est terminée : nom du joueur vainqueur
             *Si la partie n'est pas terminée : None
         """
-        resultat_x = self.analyser_le_plateau(self.plateau.état_plateau.get('X').get('5'))
-        resultat_o = self.analyser_le_plateau(self.plateau.état_plateau.get('O').get('5'))
+        resultat_x = self.analyser_le_plateau(self.plateau.état_plateau()).get('X').get('5')
+        resultat_o = self.analyser_le_plateau(self.plateau.état_plateau()).get('O').get('5')
         if resultat_x > 0:
             return self.joueurs[0]
         if resultat_o > 0:
