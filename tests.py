@@ -73,7 +73,7 @@ def test_formater_le_jeu_pour_une_partie_avancée():
         [" ", " ", " ", " ", " "],
     ]
 
-    quixo = Quixo(joueurs, plateau)
+
 
     attendu = (
         "Légende:\n"
