@@ -1,17 +1,18 @@
-# 🎮 Quixo
+# Python – Console Strategy Board Game with AI Opponent
 
-**Quixo** est une implémentation en Python du jeu de société du même nom.  
-Le but du jeu est d’aligner **cinq cubes** marqués de ton symbole (`X` ou `O`) horizontalement, verticalement ou en diagonale,  
-en **poussant** les cubes sur un plateau 5×5.  
+
+**This project is a Python implementation of a turn-based strategy board game delivered for class.**  
+The goal is to align **five cubes** marked with your symbol (`X` or `O`) horizontally, vertically, or diagonally by **pushing** cubes on a 5×5 board.
 
 ---
 
-## 🧩 Fonctionnalités
-- Interface console avec affichage du plateau  
-- Mode joueur vs IA (intelligence artificielle simple)  
-- Vérification automatique des victoires  
-- Interaction possible avec le serveur du jeu (*API PAX*)  
-- Gestion des erreurs personnalisée (`QuixoError`)  
-- Tests unitaires inclus
+## Features
+
+- Console interface with board display  
+- Player vs AI mode (simple artificial intelligence)  
+- Automatic detection of winning positions  
+- Optional interaction with the official game server (*PAX API*)  
+- Custom error handling with `QuixoError`  
+- Included unit tests  
 
 ---
